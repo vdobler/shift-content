@@ -1,0 +1,36 @@
+Shifting CMS Content with Go
+
+1 Apr 2015
+
+Volker Dobler
+Senior Application Architect, Unic AG
+volker.dobler@unic.com
+
+* The Mission
+
+Migrate the content from the existing Content Management System to the new one:
+
+- 100 GByte of Data
+- to be moved in batches
+- short content freeze periods
+
+
+* A No-Brainer?
+
+
+* Our solution
+
+
+* Why Go?
+
+Honestly: What else?
+
+- Bash
+- Fortran
+- C / C++
+- Python
+- node.js
+- Ruby
+- Haskell
+- Scala
+- Java
