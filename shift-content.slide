@@ -12,9 +12,9 @@ Migrate the content from the existing Web Content Management System to the new W
 
 .image mission.png
 
-Content is higly structured.
+Content is highly structured.
 
-Structure must be havily transformed
+This structure needs massive transformation.
 
 
 * Why Go?
@@ -37,24 +37,16 @@ But nobody commited to
 these XLST transformations...
 
 
-* Our own Domain Specific Language
 
-.code dsl-example.txt
-
-Looks much weirder than it is
-
-- two types of rules: `--->` and `-->>` with old stuff on the left, new on the right
-
-- weird stuff are technical terms of the systems
-
-- non weird stuff it what it seems to be
-
-*Free*giveaway*: Never ever omit a lexer when writing a parser.
-
-
-* The architecture
+* The Solution
 
 .image solution2.png
+
+Gophers interpreting our own Domain Specific Language
+
+.code dsl-example.txt ,/level3/
+
+*Free*giveaway*: Never ever omit a lexer when writing a parser :-)
 
 
 * Why Go?
@@ -69,50 +61,70 @@ Other factors:
 
 - easy to develop
 
+In-house alternatives:
+- Java
+- C#
+- PHP
+- (Python, Ruby)
 
-* Did it work?
+
+* Did it work out?
 
 
 * Fast
 
-Yes
+Yes!
 
 - Export and transformation is several factors faster than the import into the new system.
 
-- Concurrent load on source system is easy to control
+- Concurrent load on source system is easy to control.
 
-- Probably IO-bound 
+- Current solution is probably IO-bound.
 
 
 * Easy to operate
 
-Yes
+Yes! (But you knew this already) 
 
 - Build a static linked binary in seconds
 
 - Run that static linked binary
 
-Longest task during releases:
 
-- Update User Manual (pdf)
-
-- Upload via ftp
+Most complicated tasks during releases: Update User Manual (pdf)
 
 
 * Easy to develop
 
-Yes
+Yes!
 
-- Less than 9000 lines of code (12k incl. comments and blank lines)
+- Less than 9000 lines of code, 12 kloc incl. comments and blank lines. (Application does more than just applying the DSL to XML data.
 
-- Only stdlib libraries (plus former exp/norm)
+- Only stdlib libraries used (plus former exp/norm).
 
-- Easy to pick up
+- Correct. No changes since May 21. 2014.
 
-- Correct. No changes since May 21. 2014
+- Easy to pick up...
+
+
+* Easy to pick up
+
+- After long breaks:
+
+    $ git log --pretty="format:%h %ad %s" --date=relative
+    13fd924 1 year, 1 month ago Fix 'try' mode in the presence of UpdateMedialibRef modifiers.
+    5d318d6 1 year, 1 month ago Fix some documentation on mapping rules.
+    93ae340 1 year, 5 months ago Merge branch 'master' of github.com:vdobler/migration
+    fd2befb 1 year, 5 months ago Remove equality-check on input files during release.
+
+- For other developers
+
+
 
 
 * Easy to test
+
+* No upfront design
 
 Startes with simple implementation:
 
