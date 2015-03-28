@@ -8,29 +8,133 @@ volker.dobler@unic.com
 
 * The Mission
 
-Migrate the content from the existing Content Management System to the new one:
+Migrate the content from the existing Web Content Management System to the new WCMS
 
-- 100 GByte of Data
-- to be moved in batches
-- short content freeze periods
+.image mission.png
 
+Content is higly structured.
 
-* A No-Brainer?
-
-
-* Our solution
+Structure must be havily transformed
 
 
 * Why Go?
 
-Honestly: What else?
 
-- Bash
-- Fortran
-- C / C++
-- Python
-- node.js
-- Ruby
-- Haskell
-- Scala
-- Java
+* Go was not obvious
+
+.image xlst.png
+
+First reaction: *XLST*
+
+But nobody commited to
+
+- write,
+
+- debug or
+
+- maintain
+
+these XLST transformations...
+
+
+* Our own Domain Specific Language
+
+.code dsl-example.txt
+
+Looks much weirder than it is
+
+- two types of rules: `--->` and `-->>` with old stuff on the left, new on the right
+
+- weird stuff are technical terms of the systems
+
+- non weird stuff it what it seems to be
+
+*Free*giveaway*: Never ever omit a lexer when writing a parser.
+
+
+* The architecture
+
+.image solution2.png
+
+
+* Why Go?
+
+Personal preference
+
+Other factors:
+
+- fast
+
+- easy to operate
+
+- easy to develop
+
+
+* Did it work?
+
+
+* Fast
+
+Yes
+
+- Export and transformation is several factors faster than the import into the new system.
+
+- Concurrent load on source system is easy to control
+
+- Probably IO-bound 
+
+
+* Easy to operate
+
+Yes
+
+- Build a static linked binary in seconds
+
+- Run that static linked binary
+
+Longest task during releases:
+
+- Update User Manual (pdf)
+
+- Upload via ftp
+
+
+* Easy to develop
+
+Yes
+
+- Less than 9000 lines of code (12k incl. comments and blank lines)
+
+- Only stdlib libraries (plus former exp/norm)
+
+- Easy to pick up
+
+- Correct. No changes since May 21. 2014
+
+
+* Easy to test
+
+Startes with simple implementation:
+
+.code source.go /orig start/,/orig end/
+
+simple but hard to test
+
+
+* Introduce 4 interfaces
+
+.code source.go /final start/,/final end/
+
+simple search/replace refactoring
+
+
+* Add tests
+
+
+
+
+* Anything bad?
+
+Surprisingly little
+
+First commit on Dec 9. 2011, that's 3 month *before* Go 1.0.
