@@ -6,7 +6,7 @@ Volker Dobler
 Senior Application Architect, Unic AG
 volker.dobler@unic.com
 
-* The Mission
+* What am I doing with Go?
 
 Migrate the content from the existing Web Content Management System to the new WCMS
 
@@ -15,6 +15,7 @@ Migrate the content from the existing Web Content Management System to the new W
 Content is highly structured.
 
 This structure needs *massive*transformation*.
+
 
 
 * The next 17 minutes
@@ -39,7 +40,7 @@ This structure needs *massive*transformation*.
 
 First reaction: *XLST*
 
-But nobody commited to
+But nobody committed to
 
 - write,
 
@@ -83,12 +84,8 @@ In-house alternatives:
 - PHP
 
 
-* Did it work out?
-
 
 * Fast
-
-Yes!
 
 - Export and transformation is several factors faster than the import into the new system.
 
@@ -96,14 +93,16 @@ Yes!
 
 - Current solution is probably IO-bound.
 
+*Go*is*more*than*fast*enough.*
+
 
 * Easy to operate
 
 Yes! (But you knew this already) 
 
-- Build a static linked binary in seconds
+- Build a static linked binary in seconds.
 
-- Run that static linked binary
+- Run that static linked binary without *any* hassle.
 
 
 Most complicated tasks during releases: Update the user manual (pdf)
@@ -132,7 +131,7 @@ Yes!
     93ae340 1 year, 5 months ago Merge branch 'master' of github.com:vdobler/migration
     fd2befb 1 year, 5 months ago Remove equality-check on input files during release.
 
-- For other developers
+- For other developers: First Pull Request from a Go _and_ project novice was basically correct.
 
  
 
@@ -210,8 +209,15 @@ Done.
 * The rest
 
 
-* Anything bad?
+* Problems
 
-Surprisingly little
+Surprisingly few and little!
 
 First commit on Dec 9. 2011, that's 3 month *before* Go 1.0.
+
+
+
+
+* Any questions,...
+
+\..., remarks, comments?
