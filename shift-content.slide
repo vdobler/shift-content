@@ -14,10 +14,23 @@ Migrate the content from the existing Web Content Management System to the new W
 
 Content is highly structured.
 
-This structure needs massive transformation.
+This structure needs *massive*transformation*.
 
 
-* Why Go?
+* The next 17 minutes
+
+- How we did it
+
+- Why we chose Go
+
+- Go did work very well
+
+- Testable Go code
+
+- Discussion
+
+
+* How we did it
 
 
 * Go was not obvious
@@ -49,6 +62,8 @@ Gophers interpreting our own Domain Specific Language
 *Free*giveaway*: Never ever omit a lexer when writing a parser :-)
 
 
+* Go
+
 * Why Go?
 
 Personal preference
@@ -62,10 +77,10 @@ Other factors:
 - easy to develop
 
 In-house alternatives:
-- Java
 - C#
-- PHP
 - (Python, Ruby)
+- Java
+- PHP
 
 
 * Did it work out?
@@ -91,14 +106,14 @@ Yes! (But you knew this already)
 - Run that static linked binary
 
 
-Most complicated tasks during releases: Update User Manual (pdf)
+Most complicated tasks during releases: Update the user manual (pdf)
 
 
 * Easy to develop
 
 Yes!
 
-- Less than 9000 lines of code, 12 kloc incl. comments and blank lines. (Application does more than just applying the DSL to XML data.
+- Less than 9000 lines of code, 12 kloc incl. comments and blank lines. (Application does more than just applying the DSL to XML data.)
 
 - Only stdlib libraries used (plus former exp/norm).
 
@@ -119,30 +134,80 @@ Yes!
 
 - For other developers
 
-
-
+ 
 
 * Easy to test
 
-* No upfront design
+- Testable design emerged naturally.
 
-Startes with simple implementation:
+- No need for upfront work to make code testable.
 
-.code source.go /orig start/,/orig end/
-
-simple but hard to test
+- No complex DI infrastructure to get testdata or mocks into test.
 
 
-* Introduce 4 interfaces
+* First implementation
 
-.code source.go /final start/,/final end/
+    // SourceInfo contains information to access the source system
+    type SourceInfo struct {
+        Host         string  // host and port
+        User, Passwd string  // basic auth
+        Sitemap      string  // path to sitemap API
+    }
 
-simple search/replace refactoring
+    func FetchSitemap(source SourceInfo, root string) ([]SitemapEntry, error)
+
+    // NewJob fetches the sitemap from s and builds a Job
+    NewJob(s SourceInfo, root string) (Job, error) // uses FetchSitemap
+
+
+Simple and straight forward but hard to test.
+
+
+* Introduce interfaces
+
+Very simple search/replace refactoring:
+
+
+    type SourceInfo struct {  // unchanged
+        Host         string
+        User, Passwd string
+        Sitemap      string
+    }
+
+    type SitemapFetcher interface {
+        FetchSitemap(root string) ([]SitemapEntry, error)
+    }
+
+    // make original FetchSitemap a method; so SourceInfo becomes a SitemapFetcher
+    func (s SourceInfo) FetchSitemap(root string) ([]SitemapEntry, error)
+
+    // use the new interface
+    NewJob(smf SitemapFetcher, root string) (Job, error)
+
+
 
 
 * Add tests
 
+    // mockSource simulates selected responses from the source system
+    type mockSource struct {
+        sitemaps []SitemapEntry
+        pages    []Pages
+    }
 
+    // implement FetchSitemap
+    func (ms mockSource) FetchSitemap(rootHandle string) ([]SitemapEntry, error) {
+
+    func TestJob(t *testing.T) {
+        ms := MockSource{ ... }
+        job, err := NewJob(ms, "/content/de/brand")
+    }
+
+Done.
+
+
+
+* The rest
 
 
 * Anything bad?
