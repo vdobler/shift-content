@@ -196,14 +196,18 @@ Very simple search/replace refactoring:
     }
 
     // implement FetchSitemap
-    func (ms mockSource) FetchSitemap(root string) ([]SitemapEntry, error) {
+    func (ms mockSource) FetchSitemap(root string) ([]SitemapEntry, error)
 
     func TestJob(t *testing.T) {
         ms := mockSource{ ... }
         job, err := NewJob(ms, "/content/de/brand")
     }
 
-Done.
+Done!
+
+Additional benefit: Dependencies become explicit and visible in code.
+
+Function `NewJob` only needs sitemap data, `NewJob` won't download binaries. That's what `interface` `BinaryFetcher` is good for.
 
 
 
