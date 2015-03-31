@@ -137,11 +137,12 @@ Yes!
 
 * Easy to test
 
-- Testable design emerged naturally.
-
 - No need for upfront work to make code testable.
 
 - No complex DI infrastructure to get testdata or mocks into test.
+
+- Testable design emerged naturally.
+
 
 
 * First implementation
@@ -195,10 +196,10 @@ Very simple search/replace refactoring:
     }
 
     // implement FetchSitemap
-    func (ms mockSource) FetchSitemap(rootHandle string) ([]SitemapEntry, error) {
+    func (ms mockSource) FetchSitemap(root string) ([]SitemapEntry, error) {
 
     func TestJob(t *testing.T) {
-        ms := MockSource{ ... }
+        ms := mockSource{ ... }
         job, err := NewJob(ms, "/content/de/brand")
     }
 
