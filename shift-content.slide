@@ -114,7 +114,7 @@ Yes!
 
 - Less than 9000 lines of code, 12 kloc incl. comments and blank lines. (Application does more than just applying the DSL to XML data.)
 
-- Only stdlib libraries used (plus former exp/norm).
+- Only stdlib packages used (plus former exp/norm).
 
 - Correct. No changes since May 21. 2014.
 
@@ -157,7 +157,7 @@ Yes!
     func FetchSitemap(source SourceInfo, root string) ([]SitemapEntry, error)
 
     // NewJob fetches the sitemap from s and builds a Job
-    NewJob(s SourceInfo, root string) (Job, error) // uses FetchSitemap
+    func NewJob(s SourceInfo, root string) (Job, error) // uses FetchSitemap
 
 
 Simple and straight forward but hard to test.
@@ -182,7 +182,7 @@ Very simple search/replace refactoring:
     func (s SourceInfo) FetchSitemap(root string) ([]SitemapEntry, error)
 
     // use the new interface
-    NewJob(smf SitemapFetcher, root string) (Job, error)
+    func NewJob(smf SitemapFetcher, root string) (Job, error)
 
 
 
@@ -198,9 +198,10 @@ Very simple search/replace refactoring:
     // implement FetchSitemap
     func (ms mockSource) FetchSitemap(root string) ([]SitemapEntry, error)
 
-    func TestJob(t *testing.T) {
+    func TestNewJob(t *testing.T) {
         ms := mockSource{ ... }
         job, err := NewJob(ms, "/content/de/brand")
+        // tests go here
     }
 
 Done!
