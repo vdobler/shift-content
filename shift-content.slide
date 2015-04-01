@@ -18,7 +18,7 @@ This structure needs *massive*transformation*.
 
 
 
-* The next 17 minutes
+* The next 15 minutes
 
 - How we did it
 
@@ -69,19 +69,19 @@ Gophers interpreting our own Domain Specific Language
 
 Personal preference
 
-Other factors:
+Other constraints:
 
 - fast
 
-- easy to operate
+- operationally simple
 
 - easy to develop
 
 In-house alternatives:
 - C#
 - (Python, Ruby)
-- Java
 - PHP
+- Java
 
 
 
@@ -96,7 +96,7 @@ In-house alternatives:
 *Go*is*more*than*fast*enough.*
 
 
-* Easy to operate
+* Simple for operations
 
 Yes! (But you knew this already) 
 
