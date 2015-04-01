@@ -1,0 +1,11 @@
+dealer_info
+                      --->  sling:resourceType = "foo/components/dealerinfo"
+    Title             --->  headLine
+    Text              --->  text = Replace "\n" "<br>"
+    CompressionLevel  --->  {dam:AssetContent}jcr:content/metadata/{Double}compression
+    Level3            -->>  . dealer_info-level3
+    
+dealerteaserstageitemL4
+    Level4_Elem[globalSettings]  -->>  . globalSettings
+    Level4_Elem[endscreen]       -->>  . endscreen
+    Level4_Elem[images]          -->>  slides images
